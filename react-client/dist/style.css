@@ -321,91 +321,35 @@ a.link {
 }
 #fix{
    position: absolute;
-   top: 0;
-   right: 0;
+   top: 10px;
+   right: 10px;
+   height: 120px;
+   width: 120px;
+}
+#userHome{
+   position: absolute;
+   top:140px;
+   right: 50px;
 }
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.backToHome{
+   position: absolute;
+   top:10px;
+   right: 10px;
+   height: 100px;
+   width: 100px;
+}
+
+
+
+#profileContainer{
+   position: absolute;
+   top:0px;
+   left: 0px;
+}
 
  
  .form-control:focus {

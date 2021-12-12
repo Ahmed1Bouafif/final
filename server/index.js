@@ -91,6 +91,59 @@ app.patch('/addComment/:_id',(req,res)=>{
    else res.send(result)
  })
  })
+ app.put("/profil/:_id",(req,res)=>{
+  // console.log('param:',req.params._id)
+  // console.log('user data:', req.body)
+  dbUser.updateOneUser({_id:req.params._id},req.body,function(err) {
+    if(err) {
+      console.log("upd error ", err)
+    } else {
+      res.send('user updated!')
+    }
+  })
+})
+
+
+
+app.put('/newCarpoolingEvent',(req,res)=>{
+  dbEvents.insertCarpooling(req.body,function(err) {
+    if(err) {
+      console.log(console.err)
+    } else {
+      res.send('event added!')
+    }
+  })
+})
+app.get('/carpoolingData',(req,res)=>{
+  dbEvents.selectAllCarpooling((err,events)=>{
+    if(err){
+      console.log(err)
+    }
+    else {
+      res.send(events)
+    }
+  })
+})
+app.post('/searchCarpooling',(req,res)=>{
+  console.log(req.body)
+  dbEvents.selectSomeCarpooling({'from':req.body.from,'to':req.body.to,'date':req.body.date },(err,events)=>{
+    if(err){
+      console.log(err)
+    }
+    else {
+      console.log('eventss:',events)
+      res.send(events)
+    }
+  })
+})
+app.patch('/addCarpoolingComment/:_id',(req,res)=>{
+  dbEvents.addCommentCarpooling({_id:req.params._id},req.body.comment,(err,result)=>{
+   if(err){
+     console.log(err)
+   }
+   else res.send(result)
+ })
+ })
 app.listen(3000, function() {
   console.log('listening on port 3000!');
 });

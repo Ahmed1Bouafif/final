@@ -19,7 +19,7 @@ class App extends React.Component {
         if (this.state.view === "login") {
             return <Authentification signUp={this.signUp} login={this.login} />;
         } else  {
-            return <Home userData={this.state.view} />;
+            return <Home  userData={this.state.view} />;
         }
     }
     signUp(data) {

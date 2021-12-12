@@ -69,5 +69,66 @@ var addComment=(filter,comment,callback)=>{
     }
   })
 }
+var carpoolingSchema = mongoose.Schema ({
+  userId:String,
+  userName:String,
+  userPic:String,
+  destinationFrom:String,
+  from:String,
+  to:String,
+  date:String,
+  numberOfPlaces:Number,
+  caType:String,
+  price:Number,
+  phoneNumber:String,
+  image:String,
+  comments:[],
+  createdAt:String
+})
 
-module.exports.dbEvents = {selectAllFlatsharing,selectSomeFlatsharing,insertFlatsharing,addComment}
+var Carpooling = mongoose.model('Carpooling', carpoolingSchema);
+
+
+var selectAllCarpooling = function(callback) {
+  Carpooling.find({}, function(err, items) {
+    if(err) {
+      callback(err, null);
+    } else {
+      callback(null, items);
+    }
+  }).sort({createdAt: -1}).exec()
+};
+
+var selectSomeCarpooling = function(filter,callback) {
+  Carpooling.find(filter, function(err, items) {
+    if(err) {
+      callback(err, null);
+    } else {
+      callback(null, items);
+    }
+  }).sort({createdAt: -1}).exec()
+};
+
+var insertCarpooling=(data,callback)=>{
+  Carpooling.create(data,(err,event)=>{
+    if(err){
+      callback(err,null)
+    }
+    else{
+      callback(null,event)
+    }
+  })
+}
+var addCommentCarpooling=(filter,comment,callback)=>{
+  Carpooling.updateOne(filter,{$push: {comments:comment }},(err,user)=>{
+    if(err){
+      callback(err,null)
+    }
+    else{
+      callback(null,user)
+    }
+  })
+}
+
+
+module.exports.dbEvents = {selectAllFlatsharing,selectSomeFlatsharing,insertFlatsharing,addComment,selectAllCarpooling,selectSomeCarpooling,insertCarpooling,addCommentCarpooling}
